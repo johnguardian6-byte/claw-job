@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Claw Job // the builder feed</title>
+  <meta name="description" content="A community-driven feed of the best Open Claw, Claude Code, and Web3 builder tools. Browse. Upvote. Ship.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="header-left">
+        <a href="/" class="logo">
+          <span class="logo-claw">&gt;_</span>
+          <span class="logo-text">claw job</span>
+        </a>
+        <span class="tagline">the builder feed for open claw & web3 tools</span>
+      </div>
+      <div class="header-right">
+        <span class="header-stat" id="total-count"></span>
+        <span class="header-stat hidden" id="upvote-count"></span>
+        <button id="submit-btn" class="submit-btn">+ submit</button>
+        <button id="theme-toggle" class="theme-toggle" title="Toggle light/dark mode" aria-label="Toggle theme">
+          <span class="theme-icon-dark">&#9790;</span>
+          <span class="theme-icon-light">&#9728;</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Controls Bar -->
+  <nav class="controls-bar">
+    <div class="controls-inner">
+      <!-- Search -->
+      <div class="search-wrapper">
+        <input type="text" id="search-input" class="search-input" placeholder="search projects..." aria-label="Search projects">
+        <kbd class="search-hint">/</kbd>
+      </div>
+
+      <!-- Tags -->
+      <div class="tag-filters" id="tag-filters">
+        <button class="tag-pill active" data-tag="all">all</button>
+        <button class="tag-pill" data-tag="claude-native">claude-native</button>
+        <button class="tag-pill" data-tag="mcp">mcp</button>
+        <button class="tag-pill" data-tag="integrates-with-claude">integrates w/ claude</button>
+        <button class="tag-pill" data-tag="web3">web3 tooling</button>
+        <button class="tag-pill" data-tag="framework">framework</button>
+        <button class="tag-pill" data-tag="community">community</button>
+      </div>
+
+      <!-- Time + Sort -->
+      <div class="time-sort">
+        <div class="time-filters" id="time-filters">
+          <button class="time-btn active" data-range="all">all time</button>
+          <button class="time-btn" data-range="year">year</button>
+          <button class="time-btn" data-range="month">month</button>
+          <button class="time-btn" data-range="week">week</button>
+          <button class="time-btn" data-range="day">latest</button>
+        </div>
+        <select id="sort-select" class="sort-select">
+          <option value="hot">hot</option>
+          <option value="top">top voted</option>
+          <option value="new">newest</option>
+        </select>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Feed -->
+  <main class="feed-container">
+    <ol class="feed-list" id="feed-list">
+      <!-- Rendered by JS -->
+    </ol>
+
+    <!-- Empty State -->
+    <div class="empty-state hidden" id="empty-state">
+      <div class="empty-icon">&empty;</div>
+      <p>nothing here yet. the void stares back.</p>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <span>hand-curated with vibes. not affiliated with anthropic.</span>
+      <span class="footer-dot">&middot;</span>
+      <span>upvotes are local to your browser &mdash; your picks, your data</span>
+      <span class="footer-dot">&middot;</span>
+      <span>built for builders</span>
+    </div>
+  </footer>
+
+  <!-- Submit Modal -->
+  <div class="modal-overlay hidden" id="submit-modal">
+    <div class="modal">
+      <div class="modal-header">
+        <h2 class="modal-title">submit a project</h2>
+        <button class="modal-close" id="modal-close" aria-label="Close modal">&times;</button>
+      </div>
+      <form id="submit-form" class="modal-form">
+        <label class="form-label" for="field-name">project name *</label>
+        <input type="text" id="field-name" class="form-input" required placeholder="e.g. My Cool MCP Server">
+
+        <label class="form-label" for="field-url">url *</label>
+        <input type="url" id="field-url" class="form-input" required placeholder="https://github.com/...">
+
+        <label class="form-label" for="field-why">why it's interesting</label>
+        <textarea id="field-why" class="form-textarea" rows="3" placeholder="what makes this project worth checking out?"></textarea>
+
+        <fieldset class="form-fieldset">
+          <legend class="form-label">tags</legend>
+          <div class="form-tags">
+            <label class="form-tag-check"><input type="checkbox" name="tags" value="claude-native"> claude-native</label>
+            <label class="form-tag-check"><input type="checkbox" name="tags" value="mcp"> mcp</label>
+            <label class="form-tag-check"><input type="checkbox" name="tags" value="integrates-with-claude"> integrates w/ claude</label>
+            <label class="form-tag-check"><input type="checkbox" name="tags" value="web3"> web3</label>
+            <label class="form-tag-check"><input type="checkbox" name="tags" value="framework"> framework</label>
+            <label class="form-tag-check"><input type="checkbox" name="tags" value="community"> community</label>
+          </div>
+        </fieldset>
+
+        <button type="submit" class="form-submit">open github issue &rarr;</button>
+        <p class="form-hint">opens a pre-filled github issue. you'll need a github account.</p>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
