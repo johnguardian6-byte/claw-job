@@ -643,7 +643,7 @@
       '## Why it\'s interesting\n\n' + (why || '_No description provided_')
     );
 
-    var issueUrl = 'https://github.com/anthropics/claw-job/issues/new?title=' + title + '&body=' + body;
+    var issueUrl = 'https://github.com/johnguardian6-byte/claw-job/issues/new?title=' + title + '&body=' + body;
     window.open(issueUrl, '_blank');
     closeModal();
   }
